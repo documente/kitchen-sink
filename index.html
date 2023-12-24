@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documenté Kitchen Sink</title>
+</head>
+<body>
+<header>
+    <h1>Documenté Kitchen Sink</h1>
+    <nav></nav>
+</header>
+<main></main>
+</body>
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    nav a {
+        display: block;
+        color: #333;
+        margin-bottom: 3px;
+    }
+
+    nav a:hover {
+        background-color: #eee;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    h2 {
+        margin: 0;
+        padding: 1rem;
+        background-color: #eee;
+    }
+
+    .category {
+        font-weight: bold;
+        font-size: large;
+        margin: 0.5rem 0
+    }
+
+    section {
+        margin: 1rem;
+    }
+
+    .snippet {
+        font-family: Consolas, monospace;
+        background-color: #eee;
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+</style>
+<script>
+  const nav = document.querySelector('nav');
+  const main = document.querySelector('main');
+
+  function appendCategory(title) {
+    const h2 = document.createElement('h2');
+    h2.textContent = title;
+    main.appendChild(h2);
+
+    const div = document.createElement('div');
+    div.textContent = title;
+    div.classList.add('category');
+    nav.appendChild(div);
+  }
+
+  function appendSection(title, contentBuilder, snippet = null) {
+    const section = document.createElement('section');
+    section.id = title.toLowerCase().replace(/ /g, '-');
+    const h3 = document.createElement('h3');
+    h3.textContent = title;
+    section.appendChild(h3);
+
+    if (snippet) {
+      const snippetDiv = document.createElement('div');
+      snippetDiv.classList.add('snippet');
+      snippetDiv.textContent = snippet;
+      section.appendChild(snippetDiv);
+    }
+
+    section.appendChild(contentBuilder());
+
+    const a = document.createElement('a');
+    a.href = '#' + section.id;
+    a.textContent = title;
+    nav.appendChild(a);
+
+    main.appendChild(section);
+  }
+
+  appendCategory('Actions');
+
+  appendSection('Click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
+
+    span.innerText = 'Clicked!';
+    span.style.visibility = 'hidden';
+
+    button.textContent = 'Click me';
+    button.addEventListener('click', () => {
+      span.style.visibility = 'visible';
+    });
+
+    container.appendChild(button);
+    container.appendChild(span);
+
+    return container;
+  }, `when I click the button with text "Click me" then message "Clicked!" should be visible`);
+
+  appendSection('Double-click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
+
+    span.innerText = 'Double-clicked!';
+    span.style.visibility = 'hidden';
+
+    button.textContent = 'Double-click me';
+    button.addEventListener('dblclick', () => {
+      span.style.visibility = 'visible';
+    });
+
+    container.appendChild(button);
+    container.appendChild(span);
+
+    return container;
+  }, `when I double-click the button with text "Double-click me" then message "Double-clicked!" should be visible`);
+
+  appendSection('Right-click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
+
+    span.innerText = 'Right-clicked!';
+    span.style.visibility = 'hidden';
+
+    button.textContent = 'Right-click me';
+    button.addEventListener('contextmenu', (evt) => {
+      span.style.visibility = 'visible';
+      evt.preventDefault();
+    });
+
+    container.appendChild(button);
+    container.appendChild(span);
+
+    return container;
+  }, `when I right-click the button with text "Right-click me" then message "Right-clicked!" should be visible`);
+
+  appendSection('Type', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'type-input';
+    container.appendChild(input);
+    return container;
+  }, `when I type "Some text" into the input with ID "type-input" then it should have value "Some text"`);
+
+  appendSection('Clear', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.value = 'Some text';
+    container.appendChild(input);
+    return container;
+  }, `when I clear the input with ID "type-input" then it should have value ""`);
+
+  appendSection('Check', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    const span = document.createElement('span');
+    span.id = 'check-message';
+    span.innerText = 'Unchecked';
+    input.id = 'check-input';
+    input.type = 'checkbox';
+    input.addEventListener('change', (evt) => {
+      span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
+    });
+    container.appendChild(input);
+    container.appendChild(span);
+    return container;
+  }, `when I check the input with ID "check-input" then message with ID "check-message" it should have value "Checked!"`);
+
+  appendSection('Uncheck', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    const span = document.createElement('span');
+    span.id = 'uncheck-message';
+    span.innerText = 'Checked';
+    input.id = 'uncheck-input';
+    input.type = 'checkbox';
+    input.checked = true;
+    input.addEventListener('change', (evt) => {
+      span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
+    });
+    container.appendChild(input);
+    container.appendChild(span);
+    return container;
+  }, `when I uncheck the input with ID "uncheck-input" then message with ID "uncheck-message" it should have value "Unchecked"`);
+
+  appendSection('Scroll', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.style.height = '300px';
+    div.style.width = '300px';
+    div.style.overflow = 'scroll';
+    div.style.border = '1px solid #ccc';
+    div.style.padding = '1rem';
+    div.style.boxSizing = 'border-box';
+
+    const element = document.createElement('div');
+    element.id = 'scroll-element';
+    element.innerText = 'Scroll me into view!';
+    element.style.display = 'inline-block';
+    element.style.backgroundColor = '#b3e5ee';
+    element.style.position = 'relative';
+    element.style.left = '1000px';
+    element.style.top = '700px';
+    element.style.padding = '5px';
+
+    div.appendChild(element);
+    container.appendChild(div);
+    return container;
+  }, `given scroll-element is not visible when I scroll it into view then it should be visible`);
+
+  appendSection('Select', () => {
+    const container = document.createElement('div');
+    const select = document.createElement('select');
+    const option1 = document.createElement('option');
+    const option2 = document.createElement('option');
+    const option3 = document.createElement('option');
+    option1.value = '1';
+    option1.innerText = 'Option 1';
+    option2.value = '2';
+    option2.innerText = 'Option 2';
+    option3.value = '3';
+    option3.innerText = 'Option 3';
+    select.appendChild(option1);
+    select.appendChild(option2);
+    select.appendChild(option3);
+    container.appendChild(select);
+
+    const span = document.createElement('span');
+    span.innerText = 'Selected: ';
+    container.appendChild(span);
+
+    select.addEventListener('change', (evt) => {
+      span.innerText = 'Selected: ' + evt.target.value;
+    });
+
+    return container;
+  }, `when I select option "Option 2" in the select then message "Selected: 2" should be visible`);
+
+  appendSection('Go back', () => {
+    const container = document.createElement('div');
+    const a = document.createElement('a');
+    a.href = 'forward.html';
+    a.innerText = 'Go to next page';
+    container.appendChild(a);
+    return container;
+  }, `given I click forward link when I go back then home page should exist`);
+
+  appendSection('Go forward', () => {
+    const container = document.createElement('div');
+    const a = document.createElement('a');
+    a.href = 'forward.html';
+    a.innerText = 'Go to next page';
+    container.appendChild(a);
+    return container;
+  }, `given I click forward link when I go back and go forward then forward page should exist`);
+</script>
+</html>
