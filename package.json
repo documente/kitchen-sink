@@ -1,15 +1,21 @@
 {
   "name": "@documente/kitchen-sink",
   "version": "1.0.0-beta.1",
+  "license": "LGPL-3.0",
+  "type": "module",
   "scripts": {
     "start": "npx http-server static -p 8080",
+    "documente:cy": "documente -c documente-cypress.config.yaml",
+    "documente:playwright": "documente -c documente-playwright.config.yaml",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "playwright:open": "npx playwright test --ui",
+    "playwright:run": "npx playwright test"
   },
   "devDependencies": {
+    "@documente/documente": "^1.0.0-beta.8",
+    "@playwright/test": "^1.40.1",
+    "@types/node": "^20.10.5",
     "cypress": "^13.6.1"
-  },
-  "dependencies": {
-    "@documente/documente": "^1.0.0-beta.5"
   }
 }
