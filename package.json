@@ -1,0 +1,15 @@
+{
+  "name": "@documente/kitchen-sink",
+  "version": "1.0.0-beta.1",
+  "scripts": {
+    "start": "npx http-server static -p 8080",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.1"
+  },
+  "dependencies": {
+    "@documente/documente": "^1.0.0-beta.5"
+  }
+}
