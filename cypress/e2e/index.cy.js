@@ -36,11 +36,10 @@ message6: '#message6'
 
 # Go back
 forward-link1: '#forward-link1'
+home-header: '#home-header'
 
 # Go forward
 forward-link2: '#forward-link2'
-
-home-header: '#home-header'
 forward-header: '#forward-header'
 
 `;
