@@ -1,5 +1,6 @@
 body {
     font-family: sans-serif;
+    color: #333;
 }
 
 body, html {
@@ -44,8 +45,11 @@ nav {
 
 nav a {
     display: block;
-    color: #333;
     margin-bottom: 3px;
+}
+
+a {
+    color: #414141;
 }
 
 nav a:hover {
