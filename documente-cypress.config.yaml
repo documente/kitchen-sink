@@ -1,4 +1,4 @@
 runner: cypress
-input: static/index.html
+input: static/index.js
 selectors: documente/selectors.yaml
 testRegex: \`(.*)\`\);

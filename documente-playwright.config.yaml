@@ -1,4 +1,4 @@
 runner: playwright
-input: static/index.html
+input: static/index.js
 selectors: documente/selectors.yaml
 testRegex: \`(.*)\`\);

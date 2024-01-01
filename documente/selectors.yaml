@@ -38,3 +38,39 @@ home-header: '#home-header'
 # Go forward
 forward-link2: '#forward-link2'
 forward-header: '#forward-header'
+
+# Have text
+span1: '#span1'
+
+# Be visible
+div1: '#div1'
+
+# Contain text
+div2: '#div2'
+
+# Have value
+input3: '#input3'
+
+# Have class
+div3: '#div3'
+
+# Exist
+div4: '#div4'
+
+# Not exist
+non-existent element: '#nonExistentElement'
+
+# Be checked
+checkbox3: '#checkbox3'
+
+# Be unchecked
+checkbox4: '#checkbox4'
+
+# Be disabled
+input4: '#input4'
+
+# Be enabled
+input5: '#input5'
+
+# Have occurrences
+multi-element: '.multi-element'

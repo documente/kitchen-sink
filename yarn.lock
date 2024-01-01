@@ -48,9 +48,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@documente/documente@npm:^1.0.0-beta.10":
-  version: 1.0.0-beta.10
-  resolution: "@documente/documente@npm:1.0.0-beta.10"
+"@documente/documente@npm:^1.0.0-beta.11":
+  version: 1.0.0-beta.11
+  resolution: "@documente/documente@npm:1.0.0-beta.11"
   dependencies:
     "@documente/phrase": "npm:^1.0.0-beta.11"
     chalk: "npm:^5.3.0"
@@ -60,7 +60,7 @@ __metadata:
     yaml: "npm:^2.3.4"
   bin:
     documente: bin/index.js
-  checksum: b88b2287b4feef37b0abd93cf30ae9c9dd33935b02ea6b3d4c8641269c5e25e9cd4908ecfd90eea240f04abc8d263704daab73e64c0afc9fce2a91e73f21a340
+  checksum: 64eba6cb38aca70739a034cab733d84bf4014fd56370d7bd95bf0a4441f5c7cbdca19bf35a218cfa21387cff5054a227c022e6b900f27ea3373f345517a27ded
   languageName: node
   linkType: hard
 
@@ -68,7 +68,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@documente/kitchen-sink@workspace:."
   dependencies:
-    "@documente/documente": "npm:^1.0.0-beta.10"
+    "@documente/documente": "npm:^1.0.0-beta.11"
     "@playwright/test": "npm:^1.40.1"
     "@types/node": "npm:^20.10.5"
     cypress: "npm:^13.6.1"

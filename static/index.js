@@ -229,3 +229,115 @@ appendSection('Go forward', () => {
   container.appendChild(a);
   return container;
 }, `given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist done`);
+
+appendCategory('Assertions');
+
+appendSection('Have text', () => {
+    const container = document.createElement('div');
+    const span = document.createElement('span');
+    span.id = 'span1';
+    span.innerText = 'Hello, Documenté!';
+    container.appendChild(span);
+    return container;
+}, `when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!" done`);
+
+appendSection('Be visible', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.id = 'div1';
+    div.style.backgroundColor = '#b3e5ee';
+    div.style.padding = '1rem';
+    div.innerText = 'I should be visible.';
+    container.appendChild(div);
+    return container;
+}, `when I visit "http://localhost:8080" then div1 should be visible done`);
+
+appendSection('Contain text', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.id = 'div2';
+    div.style.backgroundColor = '#b3e5ee';
+    div.style.padding = '1rem';
+    div.innerText = 'I contain the following text: "Hello, Documenté!"';
+    container.appendChild(div);
+    return container;
+}, `when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done`);
+
+appendSection('Have value', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'input3';
+    input.value = 'Hello, Documenté!';
+    container.appendChild(input);
+    return container;
+}, `when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done`);
+
+appendSection('Have class', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.id = 'div3';
+    div.className = 'foo';
+    div.innerText = 'I have class "foo"';
+    container.appendChild(div);
+    return container;
+}, `when I visit "http://localhost:8080" then div3 should have class "foo" done`);
+
+appendSection('Exist', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.id = 'div4';
+    div.innerText = 'I exist!';
+    container.appendChild(div);
+    return container;
+}, `when I visit "http://localhost:8080" then div4 should exist done`);
+
+appendSection('Not exist', () => {
+    return document.createElement('div');
+}, `when I visit "http://localhost:8080" then non-existent element should not exist done`);
+
+appendSection('Be checked', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'checkbox3';
+    input.type = 'checkbox';
+    input.checked = true;
+    container.appendChild(input);
+    return container;
+}, `when I visit "http://localhost:8080" then checkbox3 should be checked done`);
+
+appendSection('Be unchecked', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'checkbox4';
+    input.type = 'checkbox';
+    container.appendChild(input);
+    return container;
+}, `when I visit "http://localhost:8080" then checkbox4 should be unchecked done`);
+
+appendSection('Be disabled', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'input4';
+    input.disabled = true;
+    container.appendChild(input);
+    return container;
+}, `when I visit "http://localhost:8080" then input4 should be disabled done`);
+
+appendSection('Be enabled', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'input5';
+    container.appendChild(input);
+    return container;
+}, `when I visit "http://localhost:8080" then input5 should be enabled done`);
+
+appendSection('Have occurrences', () => {
+    const container = document.createElement('div');
+    for (let i = 0; i < 4; i++) {
+        const div = document.createElement('div');
+        div.className = 'multi-element';
+        div.innerText = `Element ${i}`;
+        container.appendChild(div);
+    }
+    return container;
+}, `when I visit "http://localhost:8080" then multi-element should have 4 occurrences done`);
