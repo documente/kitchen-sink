@@ -45,6 +45,9 @@ span1: '#span1'
 # Be visible
 div1: '#div1'
 
+# Be hidden
+hidden-div: '#hidden-div'
+
 # Contain text
 div2: '#div2'
 

@@ -48,6 +48,9 @@ span1: '#span1'
 # Be visible
 div1: '#div1'
 
+# Be hidden
+hidden-div: '#hidden-div'
+
 # Contain text
 div2: '#div2'
 
@@ -155,50 +158,55 @@ when I visit "http://localhost:8080" then div1 should be visible done`);
 
   it('spec #15', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done`);
+when I visit "http://localhost:8080" then hidden-div should be hidden done`);
   });
 
   it('spec #16', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done`);
+when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done`);
   });
 
   it('spec #17', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div3 should have class "foo" done`);
+when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done`);
   });
 
   it('spec #18', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div4 should exist done`);
+when I visit "http://localhost:8080" then div3 should have class "foo" done`);
   });
 
   it('spec #19', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then non-existent element should not exist done`);
+when I visit "http://localhost:8080" then div4 should exist done`);
   });
 
   it('spec #20', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then checkbox3 should be checked done`);
+when I visit "http://localhost:8080" then non-existent element should not exist done`);
   });
 
   it('spec #21', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then checkbox4 should be unchecked done`);
+when I visit "http://localhost:8080" then checkbox3 should be checked done`);
   });
 
   it('spec #22', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input4 should be disabled done`);
+when I visit "http://localhost:8080" then checkbox4 should be unchecked done`);
   });
 
   it('spec #23', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input5 should be enabled done`);
+when I visit "http://localhost:8080" then input4 should be disabled done`);
   });
 
   it('spec #24', () => {
+    testRunner.run(`
+when I visit "http://localhost:8080" then input5 should be enabled done`);
+  });
+
+  it('spec #25', () => {
     testRunner.run(`
 when I visit "http://localhost:8080" then multi-element should have 4 occurrences done`);
   });

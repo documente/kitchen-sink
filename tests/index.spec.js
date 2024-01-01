@@ -49,6 +49,9 @@ span1: '#span1'
 # Be visible
 div1: '#div1'
 
+# Be hidden
+hidden-div: '#hidden-div'
+
 # Contain text
 div2: '#div2'
 
@@ -169,59 +172,65 @@ when I visit "http://localhost:8080" then div1 should be visible done
 
 test('spec #15', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done
+when I visit "http://localhost:8080" then hidden-div should be hidden done
 `, page, expect);
 });
 
 test('spec #16', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done
+when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done
 `, page, expect);
 });
 
 test('spec #17', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div3 should have class "foo" done
+when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done
 `, page, expect);
 });
 
 test('spec #18', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div4 should exist done
+when I visit "http://localhost:8080" then div3 should have class "foo" done
 `, page, expect);
 });
 
 test('spec #19', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then non-existent element should not exist done
+when I visit "http://localhost:8080" then div4 should exist done
 `, page, expect);
 });
 
 test('spec #20', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then checkbox3 should be checked done
+when I visit "http://localhost:8080" then non-existent element should not exist done
 `, page, expect);
 });
 
 test('spec #21', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then checkbox4 should be unchecked done
+when I visit "http://localhost:8080" then checkbox3 should be checked done
 `, page, expect);
 });
 
 test('spec #22', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input4 should be disabled done
+when I visit "http://localhost:8080" then checkbox4 should be unchecked done
 `, page, expect);
 });
 
 test('spec #23', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input5 should be enabled done
+when I visit "http://localhost:8080" then input4 should be disabled done
 `, page, expect);
 });
 
 test('spec #24', async ({ page }) => {
+  await testRunner.run(`
+when I visit "http://localhost:8080" then input5 should be enabled done
+`, page, expect);
+});
+
+test('spec #25', async ({ page }) => {
   await testRunner.run(`
 when I visit "http://localhost:8080" then multi-element should have 4 occurrences done
 `, page, expect);

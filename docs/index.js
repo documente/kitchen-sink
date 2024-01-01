@@ -272,6 +272,17 @@ withinCategory('Assertions', () => {
     return container;
   }, `when I visit "http://localhost:8080" then div1 should be visible done`);
 
+  appendSection('Be hidden', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.id = 'hidden-div';
+    div.style.visibility = 'hidden';
+    div.style.padding = '1rem';
+    div.innerText = "I'm hidden.";
+    container.appendChild(div);
+    return container;
+  }, `when I visit "http://localhost:8080" then hidden-div should be hidden done`);
+
   appendSection('Contain text', () => {
     const container = document.createElement('div');
     const div = document.createElement('div');
