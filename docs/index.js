@@ -1,20 +1,41 @@
 const nav = document.querySelector('nav');
 const main = document.querySelector('main');
 
-function appendCategory(title) {
+let currentCategoryNavigationContainer = null;
+
+function withinCategory(title, builder) {
+  const categoryBanner = document.createElement('div');
+  categoryBanner.className = 'category-banner';
   const h2 = document.createElement('h2');
   h2.textContent = title;
-  main.appendChild(h2);
+  h2.className = 'container';
+  categoryBanner.appendChild(h2);
+  main.appendChild(categoryBanner);
 
   const div = document.createElement('div');
-  div.textContent = title;
-  div.classList.add('category');
+  div.className = 'category-navigation';
+  const categoryNameDiv = document.createElement('div');
+  categoryNameDiv.textContent = title;
+  categoryNameDiv.classList.add('category');
+  div.appendChild(categoryNameDiv);
+
+  currentCategoryNavigationContainer = div;
+  builder();
+  currentCategoryNavigationContainer = null;
+
   nav.appendChild(div);
 }
 
 function appendSection(title, contentBuilder, snippet = null) {
+  if (currentCategoryNavigationContainer == null) {
+    throw new Error('No category navigation container.' +
+        ' You should call this function inside the withinCategory() builder callback.');
+  }
+
   const section = document.createElement('section');
   section.id = title.toLowerCase().replace(/ /g, '-');
+  section.className = 'container';
+
   const h3 = document.createElement('h3');
   h3.textContent = title;
   section.appendChild(h3);
@@ -31,217 +52,216 @@ function appendSection(title, contentBuilder, snippet = null) {
   const a = document.createElement('a');
   a.href = '#' + section.id;
   a.textContent = title;
-  nav.appendChild(a);
+  currentCategoryNavigationContainer.appendChild(a);
 
   main.appendChild(section);
 }
 
-appendCategory('Actions');
+withinCategory('Actions', () => {
+  appendSection('Visit', () => document.createElement('div'),
+      `when I visit "http://localhost:8080/forward.html" then forward-header should exist done`);
 
-appendSection('Visit', () => document.createElement('div'),
-    `when I visit "http://localhost:8080/forward.html" then forward-header should exist done`);
+  appendSection('Click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    const span = document.createElement('span');
+    span.id = 'message1';
+    span.innerText = 'Clicked!';
+    span.style.visibility = 'hidden';
 
-appendSection('Click', () => {
-  const container = document.createElement('div');
-  const button = document.createElement('button');
-  const span = document.createElement('span');
-  span.id = 'message1';
-  span.innerText = 'Clicked!';
-  span.style.visibility = 'hidden';
+    button.textContent = 'Click me';
+    button.id = 'button1';
+    button.addEventListener('click', () => {
+      span.style.visibility = 'visible';
+    });
 
-  button.textContent = 'Click me';
-  button.id = 'button1';
-  button.addEventListener('click', () => {
-    span.style.visibility = 'visible';
-  });
+    container.appendChild(button);
+    container.appendChild(span);
 
-  container.appendChild(button);
-  container.appendChild(span);
+    return container;
+  }, `given I visit "http://localhost:8080" when I click button1 then message1 should be visible done`);
 
-  return container;
-}, `given I visit "http://localhost:8080" when I click button1 then message1 should be visible done`);
+  appendSection('Double-click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    button.id = 'button2';
+    const span = document.createElement('span');
+    span.id = 'message2';
 
-appendSection('Double-click', () => {
-  const container = document.createElement('div');
-  const button = document.createElement('button');
-  button.id = 'button2';
-  const span = document.createElement('span');
-  span.id = 'message2';
+    span.innerText = 'Double-clicked!';
+    span.style.visibility = 'hidden';
 
-  span.innerText = 'Double-clicked!';
-  span.style.visibility = 'hidden';
+    button.textContent = 'Double-click me';
+    button.addEventListener('dblclick', () => {
+      span.style.visibility = 'visible';
+    });
 
-  button.textContent = 'Double-click me';
-  button.addEventListener('dblclick', () => {
-    span.style.visibility = 'visible';
-  });
+    container.appendChild(button);
+    container.appendChild(span);
 
-  container.appendChild(button);
-  container.appendChild(span);
+    return container;
+  }, `given I visit "http://localhost:8080" when I double-click button2 then message2 should be visible done`);
 
-  return container;
-}, `given I visit "http://localhost:8080" when I double-click button2 then message2 should be visible done`);
+  appendSection('Right-click', () => {
+    const container = document.createElement('div');
+    const button = document.createElement('button');
+    button.id = 'button3';
+    const span = document.createElement('span');
+    span.id = 'message3';
 
-appendSection('Right-click', () => {
-  const container = document.createElement('div');
-  const button = document.createElement('button');
-  button.id = 'button3';
-  const span = document.createElement('span');
-  span.id = 'message3';
+    span.innerText = 'Right-clicked!';
+    span.style.visibility = 'hidden';
 
-  span.innerText = 'Right-clicked!';
-  span.style.visibility = 'hidden';
+    button.textContent = 'Right-click me';
+    button.addEventListener('contextmenu', (evt) => {
+      span.style.visibility = 'visible';
+      evt.preventDefault();
+    });
 
-  button.textContent = 'Right-click me';
-  button.addEventListener('contextmenu', (evt) => {
-    span.style.visibility = 'visible';
-    evt.preventDefault();
-  });
+    container.appendChild(button);
+    container.appendChild(span);
 
-  container.appendChild(button);
-  container.appendChild(span);
+    return container;
+  }, `given I visit "http://localhost:8080" when I right-click button3 then message3 should be visible done`);
 
-  return container;
-}, `given I visit "http://localhost:8080" when I right-click button3 then message3 should be visible done`);
+  appendSection('Type', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'input1';
+    container.appendChild(input);
+    return container;
+  }, `given I visit "http://localhost:8080" when I type "Some text" into input1 then it should have value "Some text" done`);
 
-appendSection('Type', () => {
-  const container = document.createElement('div');
-  const input = document.createElement('input');
-  input.id = 'input1';
-  container.appendChild(input);
-  return container;
-}, `given I visit "http://localhost:8080" when I type "Some text" into input1 then it should have value "Some text" done`);
+  appendSection('Clear', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    input.id = 'input2';
+    input.value = 'Some text';
+    container.appendChild(input);
+    return container;
+  }, `given I visit "http://localhost:8080" when I clear input2 then it should have value "" done`);
 
-appendSection('Clear', () => {
-  const container = document.createElement('div');
-  const input = document.createElement('input');
-  input.id = 'input2';
-  input.value = 'Some text';
-  container.appendChild(input);
-  return container;
-}, `given I visit "http://localhost:8080" when I clear input2 then it should have value "" done`);
+  appendSection('Check', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    const span = document.createElement('span');
+    span.id = 'message4';
+    span.innerText = 'Unchecked';
+    input.id = 'checkbox1';
+    input.type = 'checkbox';
+    input.addEventListener('change', (evt) => {
+      console.log('change', evt.target.checked);
+      span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
+    });
+    container.appendChild(input);
+    container.appendChild(span);
+    return container;
+  }, `given I visit "http://localhost:8080" when I check checkbox1 then message4 should have text "Checked" done`);
 
-appendSection('Check', () => {
-  const container = document.createElement('div');
-  const input = document.createElement('input');
-  const span = document.createElement('span');
-  span.id = 'message4';
-  span.innerText = 'Unchecked';
-  input.id = 'checkbox1';
-  input.type = 'checkbox';
-  input.addEventListener('change', (evt) => {
-    console.log('change', evt.target.checked);
-    span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
-  });
-  container.appendChild(input);
-  container.appendChild(span);
-  return container;
-}, `given I visit "http://localhost:8080" when I check checkbox1 then message4 should have text "Checked" done`);
+  appendSection('Uncheck', () => {
+    const container = document.createElement('div');
+    const input = document.createElement('input');
+    const span = document.createElement('span');
+    span.id = 'message5';
+    span.innerText = 'Checked';
+    input.id = 'checkbox2';
+    input.type = 'checkbox';
+    input.checked = true;
+    input.addEventListener('change', (evt) => {
+      span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
+    });
+    container.appendChild(input);
+    container.appendChild(span);
+    return container;
+  }, `given I visit "http://localhost:8080" when I uncheck checkbox2 then message5 should have text "Unchecked" done`);
 
-appendSection('Uncheck', () => {
-  const container = document.createElement('div');
-  const input = document.createElement('input');
-  const span = document.createElement('span');
-  span.id = 'message5';
-  span.innerText = 'Checked';
-  input.id = 'checkbox2';
-  input.type = 'checkbox';
-  input.checked = true;
-  input.addEventListener('change', (evt) => {
-    span.innerText = evt.target.checked ? 'Checked' : 'Unchecked';
-  });
-  container.appendChild(input);
-  container.appendChild(span);
-  return container;
-}, `given I visit "http://localhost:8080" when I uncheck checkbox2 then message5 should have text "Unchecked" done`);
+  appendSection('Scroll', () => {
+    const container = document.createElement('div');
+    const div = document.createElement('div');
+    div.style.height = '300px';
+    div.style.width = '300px';
+    div.style.overflow = 'scroll';
+    div.style.border = '1px solid #ccc';
+    div.style.padding = '1rem';
+    div.style.boxSizing = 'border-box';
 
-appendSection('Scroll', () => {
-  const container = document.createElement('div');
-  const div = document.createElement('div');
-  div.style.height = '300px';
-  div.style.width = '300px';
-  div.style.overflow = 'scroll';
-  div.style.border = '1px solid #ccc';
-  div.style.padding = '1rem';
-  div.style.boxSizing = 'border-box';
+    const element = document.createElement('div');
+    element.id = 'scroll-element';
+    element.innerText = 'Scroll me into view!';
+    element.style.display = 'inline-block';
+    element.style.backgroundColor = '#b3e5ee';
+    element.style.position = 'relative';
+    element.style.left = '1000px';
+    element.style.top = '700px';
+    element.style.padding = '5px';
 
-  const element = document.createElement('div');
-  element.id = 'scroll-element';
-  element.innerText = 'Scroll me into view!';
-  element.style.display = 'inline-block';
-  element.style.backgroundColor = '#b3e5ee';
-  element.style.position = 'relative';
-  element.style.left = '1000px';
-  element.style.top = '700px';
-  element.style.padding = '5px';
+    div.appendChild(element);
+    container.appendChild(div);
+    return container;
+  }, `given I visit "http://localhost:8080" when I scroll to scroll-element then it should be visible done`);
 
-  div.appendChild(element);
-  container.appendChild(div);
-  return container;
-}, `given I visit "http://localhost:8080" when I scroll to scroll-element then it should be visible done`);
+  appendSection('Select', () => {
+    const container = document.createElement('div');
+    const select = document.createElement('select');
+    select.id = 'select1';
+    const option1 = document.createElement('option');
+    const option2 = document.createElement('option');
+    const option3 = document.createElement('option');
+    option1.value = '1';
+    option1.innerText = 'Option 1';
+    option2.value = '2';
+    option2.innerText = 'Option 2';
+    option3.value = '3';
+    option3.innerText = 'Option 3';
+    select.appendChild(option1);
+    select.appendChild(option2);
+    select.appendChild(option3);
+    container.appendChild(select);
 
-appendSection('Select', () => {
-  const container = document.createElement('div');
-  const select = document.createElement('select');
-  select.id = 'select1';
-  const option1 = document.createElement('option');
-  const option2 = document.createElement('option');
-  const option3 = document.createElement('option');
-  option1.value = '1';
-  option1.innerText = 'Option 1';
-  option2.value = '2';
-  option2.innerText = 'Option 2';
-  option3.value = '3';
-  option3.innerText = 'Option 3';
-  select.appendChild(option1);
-  select.appendChild(option2);
-  select.appendChild(option3);
-  container.appendChild(select);
+    const span = document.createElement('span');
+    span.id = 'message6';
+    span.innerText = 'Selected: ';
+    container.appendChild(span);
 
-  const span = document.createElement('span');
-  span.id = 'message6';
-  span.innerText = 'Selected: ';
-  container.appendChild(span);
+    select.addEventListener('change', (evt) => {
+      span.innerText = 'Selected: ' + evt.target.value;
+    });
 
-  select.addEventListener('change', (evt) => {
-    span.innerText = 'Selected: ' + evt.target.value;
-  });
+    return container;
+  }, `given I visit "http://localhost:8080" when I select "Option 2" in select1 then message6 should have text "Selected: 2" done`);
 
-  return container;
-}, `given I visit "http://localhost:8080" when I select "Option 2" in select1 then message6 should have text "Selected: 2" done`);
+  appendSection('Go back', () => {
+    const container = document.createElement('div');
+    const a = document.createElement('a');
+    a.id = 'forward-link1';
+    a.href = 'forward.html';
+    a.innerText = 'Go to next page';
+    container.appendChild(a);
+    return container;
+  }, `given I visit "http://localhost:8080" when I click forward-link1 and I go back then home-header should exist done`);
 
-appendSection('Go back', () => {
-  const container = document.createElement('div');
-  const a = document.createElement('a');
-  a.id = 'forward-link1';
-  a.href = 'forward.html';
-  a.innerText = 'Go to next page';
-  container.appendChild(a);
-  return container;
-}, `given I visit "http://localhost:8080" when I click forward-link1 and I go back then home-header should exist done`);
+  appendSection('Go forward', () => {
+    const container = document.createElement('div');
+    const a = document.createElement('a');
+    a.id = 'forward-link2';
+    a.href = 'forward.html';
+    a.innerText = 'Go to next page';
+    container.appendChild(a);
+    return container;
+  }, `given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist done`);
+});
 
-appendSection('Go forward', () => {
-  const container = document.createElement('div');
-  const a = document.createElement('a');
-  a.id = 'forward-link2';
-  a.href = 'forward.html';
-  a.innerText = 'Go to next page';
-  container.appendChild(a);
-  return container;
-}, `given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist done`);
-
-appendCategory('Assertions');
-
-appendSection('Have text', () => {
+withinCategory('Assertions', () => {
+  appendSection('Have text', () => {
     const container = document.createElement('div');
     const span = document.createElement('span');
     span.id = 'span1';
     span.innerText = 'Hello, Documenté!';
     container.appendChild(span);
     return container;
-}, `when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!" done`);
+  }, `when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!" done`);
 
-appendSection('Be visible', () => {
+  appendSection('Be visible', () => {
     const container = document.createElement('div');
     const div = document.createElement('div');
     div.id = 'div1';
@@ -250,9 +270,9 @@ appendSection('Be visible', () => {
     div.innerText = 'I should be visible.';
     container.appendChild(div);
     return container;
-}, `when I visit "http://localhost:8080" then div1 should be visible done`);
+  }, `when I visit "http://localhost:8080" then div1 should be visible done`);
 
-appendSection('Contain text', () => {
+  appendSection('Contain text', () => {
     const container = document.createElement('div');
     const div = document.createElement('div');
     div.id = 'div2';
@@ -261,18 +281,18 @@ appendSection('Contain text', () => {
     div.innerText = 'I contain the following text: "Hello, Documenté!"';
     container.appendChild(div);
     return container;
-}, `when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done`);
+  }, `when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!" done`);
 
-appendSection('Have value', () => {
+  appendSection('Have value', () => {
     const container = document.createElement('div');
     const input = document.createElement('input');
     input.id = 'input3';
     input.value = 'Hello, Documenté!';
     container.appendChild(input);
     return container;
-}, `when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done`);
+  }, `when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!" done`);
 
-appendSection('Have class', () => {
+  appendSection('Have class', () => {
     const container = document.createElement('div');
     const div = document.createElement('div');
     div.id = 'div3';
@@ -280,22 +300,22 @@ appendSection('Have class', () => {
     div.innerText = 'I have class "foo"';
     container.appendChild(div);
     return container;
-}, `when I visit "http://localhost:8080" then div3 should have class "foo" done`);
+  }, `when I visit "http://localhost:8080" then div3 should have class "foo" done`);
 
-appendSection('Exist', () => {
+  appendSection('Exist', () => {
     const container = document.createElement('div');
     const div = document.createElement('div');
     div.id = 'div4';
     div.innerText = 'I exist!';
     container.appendChild(div);
     return container;
-}, `when I visit "http://localhost:8080" then div4 should exist done`);
+  }, `when I visit "http://localhost:8080" then div4 should exist done`);
 
-appendSection('Not exist', () => {
+  appendSection('Not exist', () => {
     return document.createElement('div');
-}, `when I visit "http://localhost:8080" then non-existent element should not exist done`);
+  }, `when I visit "http://localhost:8080" then non-existent element should not exist done`);
 
-appendSection('Be checked', () => {
+  appendSection('Be checked', () => {
     const container = document.createElement('div');
     const input = document.createElement('input');
     input.id = 'checkbox3';
@@ -303,41 +323,42 @@ appendSection('Be checked', () => {
     input.checked = true;
     container.appendChild(input);
     return container;
-}, `when I visit "http://localhost:8080" then checkbox3 should be checked done`);
+  }, `when I visit "http://localhost:8080" then checkbox3 should be checked done`);
 
-appendSection('Be unchecked', () => {
+  appendSection('Be unchecked', () => {
     const container = document.createElement('div');
     const input = document.createElement('input');
     input.id = 'checkbox4';
     input.type = 'checkbox';
     container.appendChild(input);
     return container;
-}, `when I visit "http://localhost:8080" then checkbox4 should be unchecked done`);
+  }, `when I visit "http://localhost:8080" then checkbox4 should be unchecked done`);
 
-appendSection('Be disabled', () => {
+  appendSection('Be disabled', () => {
     const container = document.createElement('div');
     const input = document.createElement('input');
     input.id = 'input4';
     input.disabled = true;
     container.appendChild(input);
     return container;
-}, `when I visit "http://localhost:8080" then input4 should be disabled done`);
+  }, `when I visit "http://localhost:8080" then input4 should be disabled done`);
 
-appendSection('Be enabled', () => {
+  appendSection('Be enabled', () => {
     const container = document.createElement('div');
     const input = document.createElement('input');
     input.id = 'input5';
     container.appendChild(input);
     return container;
-}, `when I visit "http://localhost:8080" then input5 should be enabled done`);
+  }, `when I visit "http://localhost:8080" then input5 should be enabled done`);
 
-appendSection('Have occurrences', () => {
+  appendSection('Have occurrences', () => {
     const container = document.createElement('div');
     for (let i = 0; i < 4; i++) {
-        const div = document.createElement('div');
-        div.className = 'multi-element';
-        div.innerText = `Element ${i}`;
-        container.appendChild(div);
+      const div = document.createElement('div');
+      div.className = 'multi-element';
+      div.innerText = `Element ${i}`;
+      container.appendChild(div);
     }
     return container;
-}, `when I visit "http://localhost:8080" then multi-element should have 4 occurrences done`);
+  }, `when I visit "http://localhost:8080" then multi-element should have 4 occurrences done`);
+});

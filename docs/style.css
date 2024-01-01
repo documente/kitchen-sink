@@ -10,13 +10,13 @@ body, html {
 header {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    margin-bottom: 1rem;
 }
 
 header .title {
-    margin: 0 auto 1rem auto;
     display: flex;
     color: #69e59d;
+    margin-bottom: 1rem;
 }
 
 header img {
@@ -25,16 +25,21 @@ header img {
     margin: 0 1rem 0 0;
 }
 
-header span {
-    margin: 0.2rem auto;
+.header-banner {
+    padding: 1rem;
+    background-color: #eeeeee;
+    border-bottom: 1px solid #bbbbbb;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+.header-text {
+    margin: 0.2rem 0;
 }
 
 nav {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
-    padding: 1rem;
+    justify-content: flex-start;
 }
 
 nav a {
@@ -47,11 +52,29 @@ nav a:hover {
     background-color: #69e59d50;
 }
 
+.container {
+    width: 1000px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+@media (min-width: 1000px) {
+    .container {
+        width: 800px;
+    }
+}
+
+.category-navigation {
+    margin-right: 3rem;
+    margin-top: 1rem;
+    min-width: 180px;
+}
+
 h1 {
     margin: 0;
 }
 
-h2 {
+.category-banner {
     margin: 0;
     padding: 1rem;
     background-color: #69e59d;
@@ -68,8 +91,9 @@ h3 {
     margin: 0.5rem 0;
 }
 
-section {
-    margin: 1rem;
+section.container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .snippet {
