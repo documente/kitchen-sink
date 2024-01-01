@@ -1,8 +1,7 @@
 {
   "name": "@documente/kitchen-sink",
   "version": "1.0.0-beta.1",
-  "license": "LGPL-3.0",
-  "type": "module",
+  "license": "GPL-3.0",
   "scripts": {
     "start": "npx http-server static -p 8080",
     "documente:cy": "documente -c documente-cypress.config.yaml",
