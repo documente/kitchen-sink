@@ -48,11 +48,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@documente/documente@npm:^1.0.0-beta.11":
-  version: 1.0.0-beta.11
-  resolution: "@documente/documente@npm:1.0.0-beta.11"
+"@documente/documente@npm:^1.0.0-beta.13":
+  version: 1.0.0-beta.13
+  resolution: "@documente/documente@npm:1.0.0-beta.13"
   dependencies:
-    "@documente/phrase": "npm:^1.0.0-beta.11"
+    "@documente/phrase": "npm:^1.0.0-beta.13"
     chalk: "npm:^5.3.0"
     commander: "npm:^11.1.0"
     glob: "npm:^10.3.10"
@@ -60,7 +60,7 @@ __metadata:
     yaml: "npm:^2.3.4"
   bin:
     documente: bin/index.js
-  checksum: 64eba6cb38aca70739a034cab733d84bf4014fd56370d7bd95bf0a4441f5c7cbdca19bf35a218cfa21387cff5054a227c022e6b900f27ea3373f345517a27ded
+  checksum: 0cee06a52924b0b702bc605e700c627f10abbae6068cbb213dac207326228b6fed7e3cb52052e75894b1f1b8a3458e4b26badea086d116f95f576d74d3bb821d
   languageName: node
   linkType: hard
 
@@ -68,19 +68,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@documente/kitchen-sink@workspace:."
   dependencies:
-    "@documente/documente": "npm:^1.0.0-beta.11"
+    "@documente/documente": "npm:^1.0.0-beta.13"
     "@playwright/test": "npm:^1.40.1"
     "@types/node": "npm:^20.10.5"
     cypress: "npm:^13.6.1"
   languageName: unknown
   linkType: soft
 
-"@documente/phrase@npm:^1.0.0-beta.11":
-  version: 1.0.0-beta.11
-  resolution: "@documente/phrase@npm:1.0.0-beta.11"
+"@documente/phrase@npm:^1.0.0-beta.13":
+  version: 1.0.0-beta.13
+  resolution: "@documente/phrase@npm:1.0.0-beta.13"
   dependencies:
     yaml: "npm:^2.3.4"
-  checksum: 70ad043bbd72343f593f4611bc3236bb2fe6179a522d6a5078d922c88528e34df6ae9e70ec2b08ce93d1b3eed032a02f8bd72b51f137fa146dbefbe14f9bc44f
+  checksum: f7ec786d8b591fc36170e04efe8e1a64b41f84fe0a9ad34c019336daffda7d78e1d4121563800b6dabd1016366f482e585cfaea586a77ab18f7c22b2d728a7f7
   languageName: node
   linkType: hard
 
