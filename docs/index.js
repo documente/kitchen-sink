@@ -82,7 +82,7 @@ function appendSection(title, contentBuilder, snippet = null) {
 
 withinCategory('Actions', () => {
   appendSection('Visit', () => document.createElement('div'),
-      `When I visit "http://localhost:8080/forward.html"
+      `When I visit "{{basePath}}/forward.html"
       then forward-header should exist`);
 
   appendSection('Click', () => {
@@ -103,7 +103,7 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I click button1
   then message1 should be visible`);
 
@@ -126,7 +126,7 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I double-click button2
   then message2 should be visible`);
 
@@ -150,7 +150,7 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I right-click button3
   then message3 should be visible`);
 
@@ -160,7 +160,7 @@ withinCategory('Actions', () => {
     input.id = 'input1';
     container.appendChild(input);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I type "Some text" into input1
   then it should have value "Some text"`);
 
@@ -171,7 +171,7 @@ withinCategory('Actions', () => {
     input.value = 'Some text';
     container.appendChild(input);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I clear input2
   then it should have value ""`);
 
@@ -190,7 +190,7 @@ withinCategory('Actions', () => {
     container.appendChild(input);
     container.appendChild(span);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I check checkbox1
   then message4 should have text "Checked"`);
 
@@ -209,7 +209,7 @@ withinCategory('Actions', () => {
     container.appendChild(input);
     container.appendChild(span);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I uncheck checkbox2
   then message5 should have text "Unchecked"`);
 
@@ -236,7 +236,7 @@ withinCategory('Actions', () => {
     div.appendChild(element);
     container.appendChild(div);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I scroll to scroll-element
   then it should be visible`);
 
@@ -268,7 +268,7 @@ withinCategory('Actions', () => {
     });
 
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I select "Option 2" in select1
   then message6 should have text "Selected: 2"`);
 
@@ -280,7 +280,7 @@ withinCategory('Actions', () => {
     a.innerText = 'Go to next page';
     container.appendChild(a);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I click forward-link1
   and I go back
   then home-header should exist`);
@@ -293,7 +293,7 @@ withinCategory('Actions', () => {
     a.innerText = 'Go to next page';
     container.appendChild(a);
     return container;
-  }, `Given I visit "http://localhost:8080"
+  }, `Given I visit "{{basePath}}"
   when I click forward-link2
   and I go back
   and I go forward
@@ -308,7 +308,7 @@ withinCategory('Assertions', () => {
     span.innerText = 'Hello, Documenté!';
     container.appendChild(span);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then span1 should have text "Hello, Documenté!"`);
 
   appendSection('Be visible', () => {
@@ -320,7 +320,7 @@ withinCategory('Assertions', () => {
     div.innerText = 'I should be visible.';
     container.appendChild(div);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then div1 should be visible`);
 
   appendSection('Be hidden', () => {
@@ -332,7 +332,7 @@ withinCategory('Assertions', () => {
     div.innerText = "I'm hidden.";
     container.appendChild(div);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then hidden-div should be hidden`);
 
   appendSection('Contain text', () => {
@@ -344,7 +344,7 @@ withinCategory('Assertions', () => {
     div.innerText = 'I contain the following text: "Hello, Documenté!"';
     container.appendChild(div);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then div2 should contain text "Hello, Documenté!"`);
 
   appendSection('Have value', () => {
@@ -354,7 +354,7 @@ withinCategory('Assertions', () => {
     input.value = 'Hello, Documenté!';
     container.appendChild(input);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then input3 should have value "Hello, Documenté!"`);
 
   appendSection('Have class', () => {
@@ -365,7 +365,7 @@ withinCategory('Assertions', () => {
     div.innerText = 'I have class "foo"';
     container.appendChild(div);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then div3 should have class "foo"`);
 
   appendSection('Exist', () => {
@@ -375,12 +375,12 @@ withinCategory('Assertions', () => {
     div.innerText = 'I exist!';
     container.appendChild(div);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then div4 should exist`);
 
   appendSection('Not exist', () => {
     return document.createElement('div');
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then non-existent element should not exist`);
 
   appendSection('Be checked', () => {
@@ -391,7 +391,7 @@ withinCategory('Assertions', () => {
     input.checked = true;
     container.appendChild(input);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then checkbox3 should be checked`);
 
   appendSection('Be unchecked', () => {
@@ -401,7 +401,7 @@ withinCategory('Assertions', () => {
     input.type = 'checkbox';
     container.appendChild(input);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then checkbox4 should be unchecked`);
 
   appendSection('Be disabled', () => {
@@ -411,7 +411,7 @@ withinCategory('Assertions', () => {
     input.disabled = true;
     container.appendChild(input);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then input4 should be disabled`);
 
   appendSection('Be enabled', () => {
@@ -420,7 +420,7 @@ withinCategory('Assertions', () => {
     input.id = 'input5';
     container.appendChild(input);
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then input5 should be enabled`);
 
   appendSection('Have occurrences', () => {
@@ -432,6 +432,6 @@ withinCategory('Assertions', () => {
       container.appendChild(div);
     }
     return container;
-  }, `When I visit "http://localhost:8080"
+  }, `When I visit "{{basePath}}"
   then multi-element should have 4 occurrences`);
 });

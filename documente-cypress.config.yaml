@@ -1,4 +1,5 @@
 runner: cypress
 input: docs/index.js
-selectors: documente/selectors.yaml
+selectors: documente.selectors.yaml
+env: documente.env.yaml
 testRegex: \`([^`]*)\`\);
