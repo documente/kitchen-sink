@@ -88,151 +88,190 @@ const testRunner = new PlaywrightRunner(selectorTree, {});
 
 test('spec #1', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080/forward.html" then forward-header should exist
+When I visit "http://localhost:8080/forward.html"
+      then forward-header should exist
 `, page, expect);
 });
 
 test('spec #2', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I click button1 then message1 should be visible
+Given I visit "http://localhost:8080"
+  when I click button1
+  then message1 should be visible
 `, page, expect);
 });
 
 test('spec #3', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I double-click button2 then message2 should be visible
+Given I visit "http://localhost:8080"
+  when I double-click button2
+  then message2 should be visible
 `, page, expect);
 });
 
 test('spec #4', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I right-click button3 then message3 should be visible
+Given I visit "http://localhost:8080"
+  when I right-click button3
+  then message3 should be visible
 `, page, expect);
 });
 
 test('spec #5', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I type "Some text" into input1 then it should have value "Some text"
+Given I visit "http://localhost:8080"
+  when I type "Some text" into input1
+  then it should have value "Some text"
 `, page, expect);
 });
 
 test('spec #6', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I clear input2 then it should have value ""
+Given I visit "http://localhost:8080"
+  when I clear input2
+  then it should have value ""
 `, page, expect);
 });
 
 test('spec #7', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I check checkbox1 then message4 should have text "Checked"
+Given I visit "http://localhost:8080"
+  when I check checkbox1
+  then message4 should have text "Checked"
 `, page, expect);
 });
 
 test('spec #8', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I uncheck checkbox2 then message5 should have text "Unchecked"
+Given I visit "http://localhost:8080"
+  when I uncheck checkbox2
+  then message5 should have text "Unchecked"
 `, page, expect);
 });
 
 test('spec #9', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I scroll to scroll-element then it should be visible
+Given I visit "http://localhost:8080"
+  when I scroll to scroll-element
+  then it should be visible
 `, page, expect);
 });
 
 test('spec #10', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I select "Option 2" in select1 then message6 should have text "Selected: 2"
+Given I visit "http://localhost:8080"
+  when I select "Option 2" in select1
+  then message6 should have text "Selected: 2"
 `, page, expect);
 });
 
 test('spec #11', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I click forward-link1 and I go back then home-header should exist
+Given I visit "http://localhost:8080"
+  when I click forward-link1
+  and I go back
+  then home-header should exist
 `, page, expect);
 });
 
 test('spec #12', async ({ page }) => {
   await testRunner.run(`
-given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist
+Given I visit "http://localhost:8080"
+  when I click forward-link2
+  and I go back
+  and I go forward
+  then forward-header should exist
 `, page, expect);
 });
 
 test('spec #13', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!"
+When I visit "http://localhost:8080"
+  then span1 should have text "Hello, Documenté!"
 `, page, expect);
 });
 
 test('spec #14', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div1 should be visible
+When I visit "http://localhost:8080"
+  then div1 should be visible
 `, page, expect);
 });
 
 test('spec #15', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then hidden-div should be hidden
+When I visit "http://localhost:8080"
+  then hidden-div should be hidden
 `, page, expect);
 });
 
 test('spec #16', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!"
+When I visit "http://localhost:8080"
+  then div2 should contain text "Hello, Documenté!"
 `, page, expect);
 });
 
 test('spec #17', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!"
+When I visit "http://localhost:8080"
+  then input3 should have value "Hello, Documenté!"
 `, page, expect);
 });
 
 test('spec #18', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div3 should have class "foo"
+When I visit "http://localhost:8080"
+  then div3 should have class "foo"
 `, page, expect);
 });
 
 test('spec #19', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then div4 should exist
+When I visit "http://localhost:8080"
+  then div4 should exist
 `, page, expect);
 });
 
 test('spec #20', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then non-existent element should not exist
+When I visit "http://localhost:8080"
+  then non-existent element should not exist
 `, page, expect);
 });
 
 test('spec #21', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then checkbox3 should be checked
+When I visit "http://localhost:8080"
+  then checkbox3 should be checked
 `, page, expect);
 });
 
 test('spec #22', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then checkbox4 should be unchecked
+When I visit "http://localhost:8080"
+  then checkbox4 should be unchecked
 `, page, expect);
 });
 
 test('spec #23', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input4 should be disabled
+When I visit "http://localhost:8080"
+  then input4 should be disabled
 `, page, expect);
 });
 
 test('spec #24', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then input5 should be enabled
+When I visit "http://localhost:8080"
+  then input5 should be enabled
 `, page, expect);
 });
 
 test('spec #25', async ({ page }) => {
   await testRunner.run(`
-when I visit "http://localhost:8080" then multi-element should have 4 occurrences
+When I visit "http://localhost:8080"
+  then multi-element should have 4 occurrences
 `, page, expect);
 });
 

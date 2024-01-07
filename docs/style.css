@@ -116,6 +116,16 @@ section.container {
     border: 1px dashed #ccc;
 }
 
+.keyword {
+    color: #d73a49;
+    font-weight: bold;
+}
+
+.quoted-text,
+.number {
+    color: #2391ed;
+}
+
 button {
     background-color: #459f77;
     color: white;

@@ -26,6 +26,28 @@ function withinCategory(title, builder) {
   nav.appendChild(div);
 }
 
+function highlightKeywords(inputString) {
+  let resultString = inputString;
+
+  // Strings
+  const quoteRegex = /"([^"]*)"/g;
+  resultString = resultString.replace(quoteRegex, '<span class="quoted-text">"$1"</span>');
+
+  // Primary keywords
+  ['given', 'when', 'then', 'and', 'I', 'should']
+      .map(keyword => new RegExp(`\\b${keyword}\\b`, 'gi'))
+      .forEach(regex => {
+        resultString = resultString.replace(regex, '<span class="keyword">$&</span>');
+      });
+
+  // Numbers
+  const numberRegex = /(?<!:)\b(\d+)\b/g;
+  resultString = resultString.replace(numberRegex, '<span class="number">$1</span>');
+
+
+  return resultString;
+}
+
 function appendSection(title, contentBuilder, snippet = null) {
   if (currentCategoryNavigationContainer == null) {
     throw new Error('No category navigation container.' +
@@ -43,7 +65,8 @@ function appendSection(title, contentBuilder, snippet = null) {
   if (snippet) {
     const snippetContainer = document.createElement('div');
     snippetContainer.classList.add('snippet');
-    snippetContainer.textContent = snippet;
+    snippetContainer.innerHTML = highlightKeywords(snippet
+        .replace(/\n/g, '<br>'));
     section.appendChild(snippetContainer);
   }
 
@@ -59,7 +82,8 @@ function appendSection(title, contentBuilder, snippet = null) {
 
 withinCategory('Actions', () => {
   appendSection('Visit', () => document.createElement('div'),
-      `when I visit "http://localhost:8080/forward.html" then forward-header should exist`);
+      `When I visit "http://localhost:8080/forward.html"
+      then forward-header should exist`);
 
   appendSection('Click', () => {
     const container = document.createElement('div');
@@ -79,7 +103,9 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `given I visit "http://localhost:8080" when I click button1 then message1 should be visible`);
+  }, `Given I visit "http://localhost:8080"
+  when I click button1
+  then message1 should be visible`);
 
   appendSection('Double-click', () => {
     const container = document.createElement('div');
@@ -100,7 +126,9 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `given I visit "http://localhost:8080" when I double-click button2 then message2 should be visible`);
+  }, `Given I visit "http://localhost:8080"
+  when I double-click button2
+  then message2 should be visible`);
 
   appendSection('Right-click', () => {
     const container = document.createElement('div');
@@ -122,7 +150,9 @@ withinCategory('Actions', () => {
     container.appendChild(span);
 
     return container;
-  }, `given I visit "http://localhost:8080" when I right-click button3 then message3 should be visible`);
+  }, `Given I visit "http://localhost:8080"
+  when I right-click button3
+  then message3 should be visible`);
 
   appendSection('Type', () => {
     const container = document.createElement('div');
@@ -130,7 +160,9 @@ withinCategory('Actions', () => {
     input.id = 'input1';
     container.appendChild(input);
     return container;
-  }, `given I visit "http://localhost:8080" when I type "Some text" into input1 then it should have value "Some text"`);
+  }, `Given I visit "http://localhost:8080"
+  when I type "Some text" into input1
+  then it should have value "Some text"`);
 
   appendSection('Clear', () => {
     const container = document.createElement('div');
@@ -139,7 +171,9 @@ withinCategory('Actions', () => {
     input.value = 'Some text';
     container.appendChild(input);
     return container;
-  }, `given I visit "http://localhost:8080" when I clear input2 then it should have value ""`);
+  }, `Given I visit "http://localhost:8080"
+  when I clear input2
+  then it should have value ""`);
 
   appendSection('Check', () => {
     const container = document.createElement('div');
@@ -156,7 +190,9 @@ withinCategory('Actions', () => {
     container.appendChild(input);
     container.appendChild(span);
     return container;
-  }, `given I visit "http://localhost:8080" when I check checkbox1 then message4 should have text "Checked"`);
+  }, `Given I visit "http://localhost:8080"
+  when I check checkbox1
+  then message4 should have text "Checked"`);
 
   appendSection('Uncheck', () => {
     const container = document.createElement('div');
@@ -173,7 +209,9 @@ withinCategory('Actions', () => {
     container.appendChild(input);
     container.appendChild(span);
     return container;
-  }, `given I visit "http://localhost:8080" when I uncheck checkbox2 then message5 should have text "Unchecked"`);
+  }, `Given I visit "http://localhost:8080"
+  when I uncheck checkbox2
+  then message5 should have text "Unchecked"`);
 
   appendSection('Scroll', () => {
     const container = document.createElement('div');
@@ -198,7 +236,9 @@ withinCategory('Actions', () => {
     div.appendChild(element);
     container.appendChild(div);
     return container;
-  }, `given I visit "http://localhost:8080" when I scroll to scroll-element then it should be visible`);
+  }, `Given I visit "http://localhost:8080"
+  when I scroll to scroll-element
+  then it should be visible`);
 
   appendSection('Select', () => {
     const container = document.createElement('div');
@@ -228,7 +268,9 @@ withinCategory('Actions', () => {
     });
 
     return container;
-  }, `given I visit "http://localhost:8080" when I select "Option 2" in select1 then message6 should have text "Selected: 2"`);
+  }, `Given I visit "http://localhost:8080"
+  when I select "Option 2" in select1
+  then message6 should have text "Selected: 2"`);
 
   appendSection('Go back', () => {
     const container = document.createElement('div');
@@ -238,7 +280,10 @@ withinCategory('Actions', () => {
     a.innerText = 'Go to next page';
     container.appendChild(a);
     return container;
-  }, `given I visit "http://localhost:8080" when I click forward-link1 and I go back then home-header should exist`);
+  }, `Given I visit "http://localhost:8080"
+  when I click forward-link1
+  and I go back
+  then home-header should exist`);
 
   appendSection('Go forward', () => {
     const container = document.createElement('div');
@@ -248,7 +293,11 @@ withinCategory('Actions', () => {
     a.innerText = 'Go to next page';
     container.appendChild(a);
     return container;
-  }, `given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist`);
+  }, `Given I visit "http://localhost:8080"
+  when I click forward-link2
+  and I go back
+  and I go forward
+  then forward-header should exist`);
 });
 
 withinCategory('Assertions', () => {
@@ -259,7 +308,8 @@ withinCategory('Assertions', () => {
     span.innerText = 'Hello, Documenté!';
     container.appendChild(span);
     return container;
-  }, `when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!"`);
+  }, `When I visit "http://localhost:8080"
+  then span1 should have text "Hello, Documenté!"`);
 
   appendSection('Be visible', () => {
     const container = document.createElement('div');
@@ -270,7 +320,8 @@ withinCategory('Assertions', () => {
     div.innerText = 'I should be visible.';
     container.appendChild(div);
     return container;
-  }, `when I visit "http://localhost:8080" then div1 should be visible`);
+  }, `When I visit "http://localhost:8080"
+  then div1 should be visible`);
 
   appendSection('Be hidden', () => {
     const container = document.createElement('div');
@@ -281,7 +332,8 @@ withinCategory('Assertions', () => {
     div.innerText = "I'm hidden.";
     container.appendChild(div);
     return container;
-  }, `when I visit "http://localhost:8080" then hidden-div should be hidden`);
+  }, `When I visit "http://localhost:8080"
+  then hidden-div should be hidden`);
 
   appendSection('Contain text', () => {
     const container = document.createElement('div');
@@ -292,7 +344,8 @@ withinCategory('Assertions', () => {
     div.innerText = 'I contain the following text: "Hello, Documenté!"';
     container.appendChild(div);
     return container;
-  }, `when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!"`);
+  }, `When I visit "http://localhost:8080"
+  then div2 should contain text "Hello, Documenté!"`);
 
   appendSection('Have value', () => {
     const container = document.createElement('div');
@@ -301,7 +354,8 @@ withinCategory('Assertions', () => {
     input.value = 'Hello, Documenté!';
     container.appendChild(input);
     return container;
-  }, `when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!"`);
+  }, `When I visit "http://localhost:8080"
+  then input3 should have value "Hello, Documenté!"`);
 
   appendSection('Have class', () => {
     const container = document.createElement('div');
@@ -311,7 +365,8 @@ withinCategory('Assertions', () => {
     div.innerText = 'I have class "foo"';
     container.appendChild(div);
     return container;
-  }, `when I visit "http://localhost:8080" then div3 should have class "foo"`);
+  }, `When I visit "http://localhost:8080"
+  then div3 should have class "foo"`);
 
   appendSection('Exist', () => {
     const container = document.createElement('div');
@@ -320,11 +375,13 @@ withinCategory('Assertions', () => {
     div.innerText = 'I exist!';
     container.appendChild(div);
     return container;
-  }, `when I visit "http://localhost:8080" then div4 should exist`);
+  }, `When I visit "http://localhost:8080"
+  then div4 should exist`);
 
   appendSection('Not exist', () => {
     return document.createElement('div');
-  }, `when I visit "http://localhost:8080" then non-existent element should not exist`);
+  }, `When I visit "http://localhost:8080"
+  then non-existent element should not exist`);
 
   appendSection('Be checked', () => {
     const container = document.createElement('div');
@@ -334,7 +391,8 @@ withinCategory('Assertions', () => {
     input.checked = true;
     container.appendChild(input);
     return container;
-  }, `when I visit "http://localhost:8080" then checkbox3 should be checked`);
+  }, `When I visit "http://localhost:8080"
+  then checkbox3 should be checked`);
 
   appendSection('Be unchecked', () => {
     const container = document.createElement('div');
@@ -343,7 +401,8 @@ withinCategory('Assertions', () => {
     input.type = 'checkbox';
     container.appendChild(input);
     return container;
-  }, `when I visit "http://localhost:8080" then checkbox4 should be unchecked`);
+  }, `When I visit "http://localhost:8080"
+  then checkbox4 should be unchecked`);
 
   appendSection('Be disabled', () => {
     const container = document.createElement('div');
@@ -352,7 +411,8 @@ withinCategory('Assertions', () => {
     input.disabled = true;
     container.appendChild(input);
     return container;
-  }, `when I visit "http://localhost:8080" then input4 should be disabled`);
+  }, `When I visit "http://localhost:8080"
+  then input4 should be disabled`);
 
   appendSection('Be enabled', () => {
     const container = document.createElement('div');
@@ -360,7 +420,8 @@ withinCategory('Assertions', () => {
     input.id = 'input5';
     container.appendChild(input);
     return container;
-  }, `when I visit "http://localhost:8080" then input5 should be enabled`);
+  }, `When I visit "http://localhost:8080"
+  then input5 should be enabled`);
 
   appendSection('Have occurrences', () => {
     const container = document.createElement('div');
@@ -371,5 +432,6 @@ withinCategory('Assertions', () => {
       container.appendChild(div);
     }
     return container;
-  }, `when I visit "http://localhost:8080" then multi-element should have 4 occurrences`);
+  }, `When I visit "http://localhost:8080"
+  then multi-element should have 4 occurrences`);
 });

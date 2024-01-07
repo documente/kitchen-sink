@@ -1,4 +1,4 @@
 runner: playwright
 input: docs/index.js
 selectors: documente/selectors.yaml
-testRegex: \`(.*)\`\);
+testRegex: \`([^`]*)\`\);

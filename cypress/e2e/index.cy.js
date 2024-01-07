@@ -88,127 +88,166 @@ const testRunner = new CypressRunner(selectorTree, {});
 describe('specs from index.js', () => {
   it('spec #1', () => {
     testRunner.run(`
-when I visit "http://localhost:8080/forward.html" then forward-header should exist`);
+When I visit "http://localhost:8080/forward.html"
+      then forward-header should exist`);
   });
 
   it('spec #2', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I click button1 then message1 should be visible`);
+Given I visit "http://localhost:8080"
+  when I click button1
+  then message1 should be visible`);
   });
 
   it('spec #3', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I double-click button2 then message2 should be visible`);
+Given I visit "http://localhost:8080"
+  when I double-click button2
+  then message2 should be visible`);
   });
 
   it('spec #4', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I right-click button3 then message3 should be visible`);
+Given I visit "http://localhost:8080"
+  when I right-click button3
+  then message3 should be visible`);
   });
 
   it('spec #5', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I type "Some text" into input1 then it should have value "Some text"`);
+Given I visit "http://localhost:8080"
+  when I type "Some text" into input1
+  then it should have value "Some text"`);
   });
 
   it('spec #6', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I clear input2 then it should have value ""`);
+Given I visit "http://localhost:8080"
+  when I clear input2
+  then it should have value ""`);
   });
 
   it('spec #7', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I check checkbox1 then message4 should have text "Checked"`);
+Given I visit "http://localhost:8080"
+  when I check checkbox1
+  then message4 should have text "Checked"`);
   });
 
   it('spec #8', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I uncheck checkbox2 then message5 should have text "Unchecked"`);
+Given I visit "http://localhost:8080"
+  when I uncheck checkbox2
+  then message5 should have text "Unchecked"`);
   });
 
   it('spec #9', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I scroll to scroll-element then it should be visible`);
+Given I visit "http://localhost:8080"
+  when I scroll to scroll-element
+  then it should be visible`);
   });
 
   it('spec #10', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I select "Option 2" in select1 then message6 should have text "Selected: 2"`);
+Given I visit "http://localhost:8080"
+  when I select "Option 2" in select1
+  then message6 should have text "Selected: 2"`);
   });
 
   it('spec #11', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I click forward-link1 and I go back then home-header should exist`);
+Given I visit "http://localhost:8080"
+  when I click forward-link1
+  and I go back
+  then home-header should exist`);
   });
 
   it('spec #12', () => {
     testRunner.run(`
-given I visit "http://localhost:8080" when I click forward-link2 and I go back and I go forward then forward-header should exist`);
+Given I visit "http://localhost:8080"
+  when I click forward-link2
+  and I go back
+  and I go forward
+  then forward-header should exist`);
   });
 
   it('spec #13', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then span1 should have text "Hello, Documenté!"`);
+When I visit "http://localhost:8080"
+  then span1 should have text "Hello, Documenté!"`);
   });
 
   it('spec #14', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div1 should be visible`);
+When I visit "http://localhost:8080"
+  then div1 should be visible`);
   });
 
   it('spec #15', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then hidden-div should be hidden`);
+When I visit "http://localhost:8080"
+  then hidden-div should be hidden`);
   });
 
   it('spec #16', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div2 should contain text "Hello, Documenté!"`);
+When I visit "http://localhost:8080"
+  then div2 should contain text "Hello, Documenté!"`);
   });
 
   it('spec #17', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input3 should have value "Hello, Documenté!"`);
+When I visit "http://localhost:8080"
+  then input3 should have value "Hello, Documenté!"`);
   });
 
   it('spec #18', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div3 should have class "foo"`);
+When I visit "http://localhost:8080"
+  then div3 should have class "foo"`);
   });
 
   it('spec #19', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then div4 should exist`);
+When I visit "http://localhost:8080"
+  then div4 should exist`);
   });
 
   it('spec #20', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then non-existent element should not exist`);
+When I visit "http://localhost:8080"
+  then non-existent element should not exist`);
   });
 
   it('spec #21', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then checkbox3 should be checked`);
+When I visit "http://localhost:8080"
+  then checkbox3 should be checked`);
   });
 
   it('spec #22', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then checkbox4 should be unchecked`);
+When I visit "http://localhost:8080"
+  then checkbox4 should be unchecked`);
   });
 
   it('spec #23', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input4 should be disabled`);
+When I visit "http://localhost:8080"
+  then input4 should be disabled`);
   });
 
   it('spec #24', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then input5 should be enabled`);
+When I visit "http://localhost:8080"
+  then input5 should be enabled`);
   });
 
   it('spec #25', () => {
     testRunner.run(`
-when I visit "http://localhost:8080" then multi-element should have 4 occurrences`);
+When I visit "http://localhost:8080"
+  then multi-element should have 4 occurrences`);
   });
 
 });
